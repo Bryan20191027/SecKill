@@ -1,0 +1,25 @@
+html,body,#app
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-width:1366px;
+}
+.innerBody
+{
+    animation:bodyIn 1s;
+}
+#bg-video {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -100;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

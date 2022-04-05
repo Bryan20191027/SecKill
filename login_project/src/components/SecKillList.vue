@@ -42,14 +42,13 @@
     methods:{
       getSecList(){
         var vm = this;
-        alert(sessionStorage.getItem('token'))
         this.axios({
           headers:{
             "Content-Type": "application/json",
-            /*"Authorization":sessionStorage.getItem('token')*/
+            "Authorization":("Bearer "+sessionStorage.getItem('token')).toString()
           },
           method:"POST",
-          url:"http://localhost:8000/seckill-mechant/list"
+          url:"http://47.99.149.141:8000/seckill-mechant/list"
         }).then(function(resp){
           var result = resp.data;
           if(result.success==true){

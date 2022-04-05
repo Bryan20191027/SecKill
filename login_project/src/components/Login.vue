@@ -97,12 +97,12 @@ export default {
           /*Authorization: getToken(),*/
         },
         method:"POST",
-        url:"http://localhost:8000/login/dologin",
+        url:"http://47.99.149.141:8000/login/dologin",
         transformRequest:[function(data){
           return JSON.stringify(data)
         }],
         data:{
-          name:this.loginForm.name,
+          username:this.loginForm.name,
           password:this.loginForm.password
         }
       }).then(function(resp){
@@ -114,7 +114,7 @@ export default {
             const accessToken = resp.data.data.token;
             sessionStorage.clear()
             sessionStorage['uid']=JSON.stringify(resp.data.data.id)
-            sessionStorage['token']=JSON.stringify(resp.data.data.token)
+            sessionStorage['token']=resp.data.data.token
             vm.$router.push('/SecKillList')
         }
         else{
@@ -142,7 +142,7 @@ export default {
             /*Authorization: getToken(),*/
           },
           method:"POST",
-          url:"http://localhost:8000/login/addUser",
+          url:"http://47.99.149.141:8000/login/addUser",
           transformRequest:[function(data){
             return JSON.stringify(data)
           }],

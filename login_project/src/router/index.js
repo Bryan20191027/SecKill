@@ -3,6 +3,11 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
 import SecKillList from "@/components/SeckillList";
+import AdminCtrl from "../components/AdminCtrl";
+import MerchantList from "../components/AdminChild/MerchantList";
+import SecMerchantList from "../components/AdminChild/SecMerchantList";
+import AddMerchant from "../components/AdminChild/AddMerchant";
+import AddSecMerchant from "../components/AdminChild/AddSecMerchant";
 
 Vue.use(Router)
 
@@ -26,6 +31,33 @@ const router = new Router({
       meta: {
         requireAuth: true
       }
+    },
+    {
+      path: '/Admin',
+      name: 'Admin',
+      component: AdminCtrl,
+      children:[
+        {
+          path: '/MerchantList',
+          name: 'MerchantList',
+          component: MerchantList
+        },
+        {
+          path: '/SecMerchantList',
+          name: 'SecMerchantList',
+          component: SecMerchantList
+        },
+        {
+          path: '/AddMerchant',
+          name: 'AddMerchant',
+          component: AddMerchant
+        },
+        {
+          path: '/AddSecMerchant',
+          name: 'AddSecMerchant',
+          component: AddSecMerchant
+        }
+      ]
     }
   ]
 })

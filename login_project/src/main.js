@@ -11,9 +11,11 @@ import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import './assets/css/global.css'
+import Moment from 'moment'
 
 Vue.use(ElementUi)
 Vue.use(VueAxios,axios)
+Vue.prototype.moment = Moment
 
 Vue.config.productionTip = false
 

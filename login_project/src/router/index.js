@@ -15,7 +15,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/Login',
       name: 'Login',
       component: Login
     },
@@ -33,7 +33,7 @@ const router = new Router({
       }
     },
     {
-      path: '/Admin',
+      path: '/',
       name: 'Admin',
       component: AdminCtrl,
       children:[

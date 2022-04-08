@@ -113,9 +113,9 @@ export default {
             });
             const accessToken = resp.data.data.token;
             sessionStorage.clear()
-            sessionStorage['uid']=JSON.stringify(resp.data.data.id)
+            sessionStorage['uid']=resp.data.data.id
             sessionStorage['token']=resp.data.data.token
-            vm.$router.push('/SecKillList')
+            vm.$router.push('/Home')
         }
         else{
           vm.$message.error('登录失败');
@@ -159,7 +159,7 @@ export default {
               type: 'success'
             });
             this.isReg=false;
-            vm.$router.push('/SecKillList')
+            vm.$router.push('/Home')
 
           } else {
             vm.$message.error('注册失败');

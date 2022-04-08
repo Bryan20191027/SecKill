@@ -7,13 +7,20 @@ import AdminCtrl from "../components/AdminCtrl";
 import MerchantList from "../components/AdminChild/MerchantList";
 import SecMerchantList from "../components/AdminChild/SecMerchantList";
 import AddMerchant from "../components/AdminChild/AddMerchant";
-import AddSecMerchant from "../components/AdminChild/AddSecMerchant";
+import BuyMerchant from "../components/HomeChild/BuyMerchant";
+import OrderList from "../components/HomeChild/OrderList";
+import UserSetting from "../components/HomeChild/UserSetting";
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'Login',
+      component: Login
+    },
     {
       path: '/Login',
       name: 'Login',
@@ -22,7 +29,24 @@ const router = new Router({
     {
       path: '/Home',
       name: 'Home',
-      component: Home
+      component: Home,
+      children:[
+        {
+          path: '/Home/BuyMerchant',
+          name: 'MerchantList',
+          component: BuyMerchant
+        },
+        {
+          path: '/Home/OrderList',
+          name: 'SecMerchantList',
+          component: OrderList
+        },
+        {
+          path: '/Home/UserSetting',
+          name: 'AddMerchant',
+          component: UserSetting
+        }
+      ]
     },
     {
       path: '/SecKillList',
@@ -33,29 +57,24 @@ const router = new Router({
       }
     },
     {
-      path: '/',
+      path: '/Admin',
       name: 'Admin',
       component: AdminCtrl,
       children:[
         {
-          path: '/MerchantList',
+          path: '/Admin/MerchantList',
           name: 'MerchantList',
           component: MerchantList
         },
         {
-          path: '/SecMerchantList',
+          path: '/Admin/SecMerchantList',
           name: 'SecMerchantList',
           component: SecMerchantList
         },
         {
-          path: '/AddMerchant',
+          path: '/Admin/AddMerchant',
           name: 'AddMerchant',
           component: AddMerchant
-        },
-        {
-          path: '/AddSecMerchant',
-          name: 'AddSecMerchant',
-          component: AddSecMerchant
         }
       ]
     }

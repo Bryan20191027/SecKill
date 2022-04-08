@@ -2,7 +2,7 @@
   <div class="Navigator">
     <el-col :span="3">
       <el-menu
-        :default-active="this.$router.path"
+        :default-active="this.$route.path"
         class="left-menu"
         @open="handleOpen"
         @close="handleClose"
@@ -11,14 +11,14 @@
         active-text-color="#409EFF"
         unique-opened
         :router="true">
-        <el-submenu index="1">
+        <el-submenu index="/Admin/MerchantList">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span style="font-size: 20px">商品设置</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/MerchantList" style="font-size: 17px">商品列表</el-menu-item>
-            <el-menu-item index="/AddMerchant" style="font-size: 17px">增加商品</el-menu-item>
+            <el-menu-item index="/Admin/MerchantList" style="font-size: 17px">商品列表</el-menu-item>
+            <el-menu-item index="/Admin/AddMerchant" style="font-size: 17px">增加商品</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
@@ -27,8 +27,7 @@
             <span style="font-size: 20px">秒杀商品设置</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/SecMerchantList" style="font-size: 17px">秒杀商品列表</el-menu-item>
-            <el-menu-item index="/AddSecMerchant" style="font-size: 17px">增加秒杀商品</el-menu-item>
+            <el-menu-item index="/Admin/SecMerchantList" style="font-size: 17px">秒杀商品列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">

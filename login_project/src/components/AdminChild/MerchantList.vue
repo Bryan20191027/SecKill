@@ -9,9 +9,9 @@
         </div>
         <div class="text item">
           <div>{{"商品id:"+merchant.id}}</div>
-          <div>{{"商品价格:"+merchant.price}}</div>
-          <div>{{"商品数量:"+merchant.count}}</div>
-          <div>{{"商品描述:"+merchant.description}}</div>
+          <div>{{"价格:"+merchant.price}}</div>
+          <div>{{"数量:"+merchant.count}}</div>
+          <div>{{"描述:"+merchant.description}}</div>
         </div>
         <div>
           <el-button type="primary" size="small" icon="el-icon-edit" @click="changeMerchant(index)">修改</el-button>
@@ -198,7 +198,10 @@ export default {
         || this.MerchantsSet.start_time === ""||this.MerchantsSet.end_time === "") {
         this.$message.error('请输入完整秒杀商品信息')
       } else if(this.MerchantsSet.start_time>this.MerchantsSet.end_time){
-        this.$message.error('请输入正确秒杀商品时间信息')
+        this.$message.error('请输入正确秒杀商品时间段')
+      }
+      else if(this.MerchantsSet.end_time<new Date()){
+        this.$message.error('请输入正确秒杀商品结束时间')
       }
       else {
         this.MerchantsSet.start_time=this.moment(this.MerchantsSet.start_time).format("YYYY-MM-DD HH:mm:ss")
@@ -225,9 +228,9 @@ export default {
           } else {
             vm.$message.error('设置失败');
           }
+          vm.ifSet = false
         })
         this.MerchantsSet={}
-        this.ifSet = false
         this.settingIndex = null
         //this.$forceUpdate()
       }
@@ -262,10 +265,6 @@ export default {
   margin-bottom: 20px;
   margin-top: 20px;
 }
-.el-but{
-  margin-right: 5px;
-}
-
 .changeDiv{
   alignment: center;
   font-size: 40px;

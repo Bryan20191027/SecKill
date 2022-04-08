@@ -1,10 +1,10 @@
 <template>
-  <h3>12111</h3>
+
 </template>
 
 <script>
 export default {
-name: "AddSecMerchant"
+  name: "UserSetting"
 }
 </script>
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-container>
-      <el-row :gutter="20" v-if="!ifChange">
-        <el-col v-for="(merchant,index) in SecMerchants" :key="reFresh" :span="6" :offset="1" class="el-col">
+    <el-container class="conScroll">
+      <el-row :gutter="20" v-if="!ifChange" style="display: flex;flex-wrap: wrap">
+        <el-col v-for="(merchant,index) in SecMerchants" :key="reFresh" :span="5" :offset="2" class="el-col">
           <el-card class="box-card1" shadow="hover">
             <div slot="header" class="clearfix" style="font-size: 30px">
               <span>{{merchant.id}}</span>
@@ -189,10 +189,8 @@ export default {
   margin-bottom: 18px;
 }
 .box-card1 {
-  width: 500px;
-}
-.box-card2 {
-  width: 200px;
+  width: 350px;
+  border-color: #99a9bf;
 }
 
 .clearfix:before,
@@ -220,6 +218,11 @@ export default {
   left:0;
   right:0;
   bottom:0;
+}
+
+.conScroll{
+  height: 100vh;
+  overflow-y: scroll;
 }
 </style>
 

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
-import SecKillList from "@/components/SeckillList";
 import AdminCtrl from "../components/AdminCtrl";
 import MerchantList from "../components/AdminChild/MerchantList";
 import SecMerchantList from "../components/AdminChild/SecMerchantList";
@@ -18,8 +17,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: '/',
+      redirect:'/Login'
     },
     {
       path: '/Login',
@@ -47,14 +46,6 @@ const router = new Router({
           component: UserSetting
         }
       ]
-    },
-    {
-      path: '/SecKillList',
-      name: 'SecKillList',
-      component: SecKillList,
-      meta: {
-        requireAuth: true
-      }
     },
     {
       path: '/Admin',

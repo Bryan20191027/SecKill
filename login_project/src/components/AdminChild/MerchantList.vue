@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-container>
-  <el-row :gutter="20" v-if="(!ifChange)&&(!ifSet)">
-    <el-col v-for="(merchant,index) in Merchants" :key="reFresh" :span="6" :offset="1" class="el-col">
+    <el-container class="conScroll">
+  <el-row :gutter="20" v-if="(!ifChange)&&(!ifSet)" style="display: flex;flex-wrap: wrap">
+    <el-col v-for="(merchant,index) in Merchants" :key="reFresh" :span="5" :offset="1" class="el-col" >
       <el-card class="box-card1" shadow="hover">
         <div slot="header" class="clearfix">
           <span>{{merchant.name}}</span>
@@ -15,7 +15,7 @@
         </div>
         <div>
           <el-button type="primary" size="small" icon="el-icon-edit" @click="changeMerchant(index)">修改</el-button>
-          <el-button type="success" size="small" @click="setMerchant(index)">设置商品为秒杀商品</el-button>
+          <el-button type="success" size="small" @click="setMerchant(index)">设置为秒杀商品</el-button>
           <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteMerchant(merchant.id)">删除</el-button>
         </div>
       </el-card>
@@ -247,20 +247,18 @@ export default {
   margin-bottom: 18px;
 }
 .box-card1 {
-  width: 500px;
-}
-.box-card2 {
-  width: 200px;
+  width: 420px;
+  border-color: #99a9bf;
 }
 
-.clearfix:before,
+/*.clearfix:before,
 .clearfix:after {
   display: table;
   content: "";
 }
 .clearfix:after {
   clear: both
-}
+}*/
 .el-col {
   margin-bottom: 20px;
   margin-top: 20px;
@@ -277,6 +275,11 @@ export default {
   left:0;
   right:0;
   bottom:0;
+}
+
+.conScroll{
+  height: 100vh;
+  overflow-y: scroll;
 }
 </style>
 

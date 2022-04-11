@@ -10,7 +10,7 @@
           <h3> </h3>
           <el-form ref="form" label-width="80px">
             <el-form-item label="用户名">
-              <el-input v-model="loginForm.name" class="input"></el-input>
+              <el-input v-model="loginForm.username" class="input"></el-input>
             </el-form-item>
             <el-form-item label="密码">
               <el-input type="password" v-model="loginForm.password" class="input"></el-input>
@@ -33,12 +33,12 @@
             </el-row>
           </el-form>
         </div>
-        <div class="loginDiv" v-if="isReg">
+        <div class="regDiv" v-if="isReg">
           <h2>注册页面</h2>
           <h3> </h3>
-          <el-form ref="form" label-width="80px">
+          <el-form :model="regForm" label-width="80px">
             <el-form-item label="用户名">
-              <el-input v-model="regForm.name" class="input"></el-input>
+              <el-input v-model="regForm.username"></el-input>
             </el-form-item>
             <el-form-item label="密码">
               <el-input type="password" v-model="regForm.password" class="input"></el-input>
@@ -46,16 +46,34 @@
             <el-form-item label="确认密码">
               <el-input type="password" v-model="regForm.secPassword" class="input"></el-input>
             </el-form-item>
-            <el-form-item label="手机号">
-              <el-input v-model="regForm.phone" class="input"></el-input>
+            <el-form-item label="真实姓名">
+              <el-input v-model="regForm.name" class="input"></el-input>
             </el-form-item>
             <el-form-item label="身份证号">
               <el-input v-model="regForm.idCard" class="input"></el-input>
             </el-form-item>
-            <el-row :gutter="20">
+            <el-form-item label="年龄" prop="age" :rules="[
+              {type:'number',message: '年龄必须为数字值'}
+            ]">
+              <el-input type="age" v-model.number="regForm.age" class="input"></el-input>
+            </el-form-item>
+                <el-form-item label="手机号">
+                  <el-input v-model="regForm.mobile" class="input"></el-input>
+                </el-form-item>
+                <el-form-item label="性别">
+                  <div>
+                    <el-radio v-model="regForm.sexual" :label="true" style="color: black;">男</el-radio>
+                    <el-radio v-model="regForm.sexual" :label="false" style="color: black;">女</el-radio>
+                    <el-radio v-model="regForm.sexual" label="" style="color: black;">中</el-radio>
+                  </div>
+                </el-form-item>
+                <el-form-item label="邮箱地址">
+                  <el-input v-model="regForm.email" class="input"></el-input>
+                </el-form-item>
+            <el-row :gutter="20" style="margin-top: 10px">
               <el-col :span="6" :offset="3">
                 <el-form-item>
-                  <el-button type="primary" @click="userRegister()">注册</el-button>
+                  <el-button type="primary" @click="userRegister">注册</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -74,15 +92,19 @@ export default {
   data(){
     return{
       loginForm:{
-        name:"",
+        username:"",
         password:"",
       },
       regForm:{
-        name:"",
+        username:'',
         password:"",
         secPassword:"",
-        phone:"",
+        mobile:"",
         idCard:"",
+        age:"",
+        email:"",
+        name:"",
+        sexual:""
       },
       backGroundSrc:"../assets/bg.mp4",
       isReg:false
@@ -102,20 +124,24 @@ export default {
           return JSON.stringify(data)
         }],
         data:{
-          username:this.loginForm.name,
+          username:this.loginForm.username,
           password:this.loginForm.password
         }
       }).then(function(resp){
-        if(resp.data.success === true){
+        var result = resp.data
+        if(result.success === true){
             vm.$message({
               message: '登录成功',
               type: 'success'
             });
-            const accessToken = resp.data.data.token;
+            const accessToken = result.data.token;
             sessionStorage.clear()
-            sessionStorage['uid']=resp.data.data.id
-            sessionStorage['token']=resp.data.data.token
-            vm.$router.push('/Home')
+            sessionStorage['uid']=result.data.id
+            sessionStorage['token']=result.data.token
+            if(result.data.legal ===1)
+              vm.$router.push('/Home/buyMerchant')
+            else
+              vm.$router.push('/Home/OrderList')
         }
         else{
           vm.$message.error('登录失败');
@@ -129,10 +155,25 @@ export default {
     clickToReg(){
       this.isReg=true
     },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          alert('error submit!!');
+          return false;
+        }
+      });
+    },
     userRegister(){
       var vm = this;
-      if(this.regForm.name===""||this.regForm.password===""||this.regForm.secPassword===""||this.regForm.phone===""||this.regForm.idCard==="")
-        vm.$message.error('请输入注册完整信息');
+      if(this.regForm.username===""||this.regForm.password===""||this.regForm.secPassword===""||
+        this.regForm.idCard===""||this.regForm.age===""||this.regForm.name==="")
+        vm.$message.error('请输入完整注册信息');
+      else if(this.regForm.username.length<=3||this.regForm.username.length>8)
+        vm.$message.error('用户名长度应该在4到8位之间');
+      else if(this.regForm.password.length<=7)
+        vm.$message.error('密码长度应该大于7');
       else if(this.regForm.password!==this.regForm.secPassword)
         vm.$message.error('两次输入密码不一致');
       else{
@@ -147,10 +188,15 @@ export default {
             return JSON.stringify(data)
           }],
           data:{
-            name:this.regForm.name,
+            username:this.regForm.username,
             password:this.regForm.password,
-            phone:this.regForm.phone,
-            idcard:this.regForm.idCard
+            mobile:this.regForm.phone,
+            idcard:this.regForm.idCard,
+            age:this.regForm.age,
+            email:this.regForm.email,
+            name:this.regForm.name,
+            sexual:true,
+            roleName:"用户"
           }
         }).then(function(resp) {
           if (resp.data.success===true) {
@@ -158,10 +204,10 @@ export default {
               message: '注册成功',
               type: 'success'
             });
-            this.isReg=false;
-            vm.$router.push('/Home')
-
+            vm.isReg=false;
+            vm.$router.push('/Home/buyMerchant')
           } else {
+            alert(JSON.stringify(resp.data))
             vm.$message.error('注册失败');
           }
         })
@@ -177,17 +223,32 @@ export default {
 
   .loginDiv{
     width:300px;
-    height:500px;
+    height:auto;
     border: 1px solid #2c3e50;
     border-radius: 20px;
     padding:20px;
     position: absolute;
-    background:rgba(255,255,255,0.3)
+    background:rgba(255,255,255,0.3);
+    margin-top:60px;
  }
-  .input{
-    width: 200px;
-  }
 
+  .regDiv{
+    width:300px;
+    height:680px;
+    border: 1px solid #2c3e50;
+    border-radius: 20px;
+    padding:20px;
+    position: absolute;
+    background:rgba(255,255,255,0.3);
+    margin-top:60px;
+  }
+  .regDIV{
+    border-color: red;
+    border-width: 5px;
+  }
+  .collDiv{
+    background:rgba(255,255,255,0.3);
+  }
 
 </style>
 

@@ -13,6 +13,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/global.css'
 import Moment from 'moment'
 
+import SecKillTimes from "./components/HomeChild/SecKillTimes"
+Vue.component('timeCD',SecKillTimes)
+
 Vue.use(ElementUi)
 Vue.use(VueAxios,axios)
 Vue.prototype.moment = Moment

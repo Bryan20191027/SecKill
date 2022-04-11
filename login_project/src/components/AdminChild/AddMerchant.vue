@@ -66,7 +66,7 @@ export default {
                 message: '添加成功',
                 type: 'success'
               });
-              vm.$router.push('/MerchantList')
+              vm.$router.push('/Admin/MerchantList')
             } else {
               vm.$message.error('添加失败');
             }

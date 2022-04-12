@@ -31,7 +31,10 @@ const router = new Router({
       name: 'Home',
       component: Home,
       meta:{
-        requireAuth:true
+        requireAuth:true,
+        requireAdminAuth:false,
+        requireUserAuth:true,
+        requireSecAuth:false
       },
       children:[
         {
@@ -39,7 +42,10 @@ const router = new Router({
           name: 'MerchantList',
           component: BuyMerchant,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:false,
+            requireUserAuth:true,
+            requireSecAuth:true
           },
         },
         {
@@ -47,7 +53,10 @@ const router = new Router({
           name: 'SecMerchantList',
           component: OrderList,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:false,
+            requireUserAuth:true,
+            requireSecAuth:false
           },
         },
         {
@@ -55,7 +64,10 @@ const router = new Router({
           name: 'AddMerchant',
           component: UserSetting,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:false,
+            requireUserAuth:true,
+            requireSecAuth:false
           },
         }
       ]
@@ -65,7 +77,9 @@ const router = new Router({
       name: 'Admin',
       component: AdminCtrl,
       meta:{
-        requireAuth:true
+        requireAuth:true,
+        requireAdminAuth:true,
+        requireUserAuth: false
       },
       children:[
         {
@@ -73,7 +87,9 @@ const router = new Router({
           name: 'MerchantList',
           component: MerchantList,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:true,
+            requireUserAuth: false
           },
         },
         {
@@ -81,7 +97,9 @@ const router = new Router({
           name: 'SecMerchantList',
           component: SecMerchantList,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:true,
+            requireUserAuth: false
           },
         },
         {
@@ -89,7 +107,9 @@ const router = new Router({
           name: 'AddMerchant',
           component: AddMerchant,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:true,
+            requireUserAuth: false
           },
         },
         {
@@ -97,7 +117,9 @@ const router = new Router({
           name: 'UserCtrl',
           component: UserCtrl,
           meta:{
-            requireAuth:true
+            requireAuth:true,
+            requireAdminAuth:true,
+            requireUserAuth: false
           },
         }
       ]
@@ -107,9 +129,57 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
+    //如果要去的页面需要权限
     if (sessionStorage.getItem("token")) {
-      next()
+      //判断是否登录
+      if(to.meta.requireAdminAuth){
+        //判断要去的页面是否为管理员页面
+        if(JSON.parse(decodeURIComponent(window.atob(window.sessionStorage.getItem('role'))))===101){
+          next()
+        }
+        else{
+          sessionStorage.clear()
+          alert('抱歉，您未拥有访问该网页的权限')
+          next({
+            path: '/',
+            // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由，这要进一步在登陆页面判断
+            query: { redirect: to.fullPath}
+          })
+        }
+      }
+      else if(to.meta.requireUserAuth){
+        if(to.meta.requireSecAuth) {
+          //判断要去的页面是否为用户秒杀页面
+          if (JSON.parse(decodeURIComponent(window.atob(window.sessionStorage.getItem('role')))) === 102) {
+            next()
+          } else {
+            sessionStorage.clear()
+            alert('抱歉，您未拥有访问该网页的权限')
+            next({
+              path: '/',
+              // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由，这要进一步在登陆页面判断
+              query: { redirect: to.fullPath}
+            })
+          }
+        }
+        else{
+          if (JSON.parse(decodeURIComponent(window.atob(window.sessionStorage.getItem('role')))) === 102||
+            JSON.parse(decodeURIComponent(window.atob(window.sessionStorage.getItem('role')))) === 103) {
+            next()
+          } else {
+            sessionStorage.clear()
+            alert('抱歉，您未拥有访问该网页的权限')
+            next({
+              path: '/',
+              // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由，这要进一步在登陆页面判断
+              query: {redirect: to.fullPath}
+            })
+          }
+        }
+      }
     } else {
+      sessionStorage.clear()
+      alert('抱歉，您未拥有访问该网页的权限')
       next({
         path: '/',
         // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由，这要进一步在登陆页面判断

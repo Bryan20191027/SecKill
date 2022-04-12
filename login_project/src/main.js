@@ -32,7 +32,7 @@ new Vue({
   template: '<App/>'
 })
 
-let whitelist = ['http://47.99.149.141:8000/login/dologin']
+let whitelist = ['http://47.99.149.141:8000/login/dologin','http://47.99.149.141:8000/login/addUser']
 axios.interceptors.request.use(config=>{
   console.log(config)
   if (whitelist.includes(config.url)) {

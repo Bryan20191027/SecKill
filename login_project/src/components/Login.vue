@@ -66,7 +66,6 @@
                   <div>
                     <el-radio v-model="regForm.sexual" :label="true" style="color: black;">男</el-radio>
                     <el-radio v-model="regForm.sexual" :label="false" style="color: black;">女</el-radio>
-                    <el-radio v-model="regForm.sexual" label="" style="color: black;">中</el-radio>
                   </div>
                 </el-form-item>
                 <el-form-item label="邮箱地址">
@@ -139,8 +138,11 @@ export default {
             sessionStorage.clear()
             sessionStorage['uid']=window.btoa(window.encodeURIComponent(JSON.stringify(result.data.id)))
             sessionStorage['token']=window.btoa(window.encodeURIComponent(JSON.stringify(result.data.token)))
-            if(result.data.legal ===1)
+            sessionStorage['role']=window.btoa(window.encodeURIComponent(JSON.stringify(result.data.role)))
+            if(result.data.role ===102)
               vm.$router.push('/Home/buyMerchant')
+            else if(result.data.role === 101)
+              vm.$router.push('/Admin/MerchantList')
             else
               vm.$router.push('/Home/OrderList')
         }
@@ -206,7 +208,7 @@ export default {
               type: 'success'
             });
             vm.isReg=false;
-            vm.$router.push('/Home/buyMerchant')
+            /*vm.$router.push('/Home/buyMerchant')*/
           } else {
             alert(JSON.stringify(resp.data))
             vm.$message.error('注册失败');

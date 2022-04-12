@@ -106,6 +106,7 @@ export default {
         url: "http://47.99.149.141:8000/mechant"
       }).then(function (resp) {
         var result = resp.data;
+
         if (result.success === true) {
           for (var i = 0; i < result.data.list.length; i++) {
             vm.Merchants.push(result.data.list[i])

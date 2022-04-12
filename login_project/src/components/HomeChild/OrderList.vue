@@ -10,7 +10,7 @@
               <span>秒杀商品id:{{merchant.id}}</span>
             </div>
             <div class="text item">
-              <span style="font-size: 18px;">商品id:{{merchant.mid}}</span>
+              <span style="font-size: 18px;">商品名称:{{merchant.name}}</span>
               <div style="padding: 14px">
                 <span style="font-size: 20px;">&#12288&#12288&#12288数量:1</span>
                 <span style="font-size: 20px;color: crimson;">{{"&#12288&#12288&#12288价格:￥"+merchant.seckillPrice}}</span>
@@ -44,7 +44,7 @@ export default {
     return{
       userOrderList:{
         id:"",
-        mid:"",
+        name:"",
         seckillPrice:0,
         description:"",
         gmtCreate:""
@@ -58,6 +58,7 @@ export default {
   methods:{
     getUserOrderList() {
       this.userOrderList=[]
+      console.log(JSON.parse(decodeURIComponent(window.atob(sessionStorage.getItem('uid')))))
       var vm = this;
       this.axios({
         headers: {
@@ -72,13 +73,18 @@ export default {
         var result = resp.data;
         if (result.success === true) {
           for (var i = 0; i < result.data.length; i++) {
-            var orderOne = {}
-            orderOne.id=result.data[i].id
-            orderOne.mid=result.data[i].mid
-            orderOne.seckillPrice=result.data[i].seckillMechant.seckillPrice
-            orderOne.description=result.data[i].seckillMechant.description
-            orderOne.gmtCreate=result.data[i].gmtCreate
-            vm.userOrderList.push(orderOne)
+            if(result.data[i].seckillMechant!==null) {
+              var orderOne = {}
+              orderOne.id = result.data[i].id
+              orderOne.name = result.data[i].seckillMechant.name
+              orderOne.seckillPrice = result.data[i].seckillMechant.seckillPrice
+              orderOne.description = result.data[i].seckillMechant.description
+              orderOne.gmtCreate = result.data[i].gmtCreate
+              vm.userOrderList.push(orderOne)
+            }
+            else{
+              continue
+            }
           }
         } else {
           alert("Fail")

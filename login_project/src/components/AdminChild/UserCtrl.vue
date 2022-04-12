@@ -14,7 +14,7 @@
                 <span style="font-size: 18px;">角色:{{user.role}}</span>
                 <div style="padding: 14px">
                   <span style="font-size: 20px;">{{"&#12288&#12288&#12288真实姓名："+user.name}}</span>
-                  <span style="font-size: 20px;color: crimson;">{{"&#12288&#12288&#12288身份证证号:￥"+user.idcard}}</span>
+                  <span style="font-size: 20px;color: crimson;">{{"&#12288&#12288&#12288身份证证号:"+user.idcard}}</span>
                 </div>
                 <div class="rightDIV">
                   <el-button type="danger" round @click="deleteUser(user.userId)">删除用户</el-button>
@@ -84,7 +84,7 @@ export default {
           for (var i = 0; i < result.data.length; i++) {
             var userOne = {}
             userOne.userId=result.data[i].userId
-            userOne.role=result.data[i].roleId===102?"用户":"管理员"
+            userOne.role=(result.data[i].roleId===102?"用户":(result.data[i].roleId===103?"禁止用户":"管理员"))
             userOne.username=result.data[i].username
             userOne.email=result.data[i].email
             userOne.mobile=result.data[i].mobile

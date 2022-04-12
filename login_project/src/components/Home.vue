@@ -11,7 +11,7 @@
         active-text-color="#409EFF"
         unique-opened
         :router="true">
-        <el-menu-item index="/Home/buyMerchant">
+        <el-menu-item index="/Home/buyMerchant" :disabled="!this.ableToBuy">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span style="font-size: 20px">购买商品</span>
@@ -40,6 +40,11 @@
 <script>
 export default {
   name: "Home",
+  data(){
+    return{
+      ableToBuy:true
+    }
+  },
   watch: {
     // 监听路由变化
     '$route.path': {
@@ -49,7 +54,13 @@ export default {
       immediate: true
     }
   },
+  mounted() {
+    this.checkBuy()
+  },
   methods: {
+    checkBuy(){
+      this.ableToBuy = JSON.parse(decodeURIComponent(window.atob(window.sessionStorage.getItem('role')))) === 102;
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },

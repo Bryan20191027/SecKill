@@ -2,7 +2,7 @@
   <div>
     <topDiv></topDiv>
     <el-container class="conScroll">
-  <el-row :gutter="20" v-if="(!ifChange)&&(!ifSet)" style="display: flex;flex-wrap: wrap">
+  <el-row :gutter=20 v-if="(!ifChange)&&(!ifSet)" style="display: flex;flex-wrap: wrap;">
     <el-col v-for="(merchant,index) in Merchants" :key="reFresh" :span="6" :offset="1" class="el-col" >
       <el-card class="box-card1" shadow="hover">
         <div slot="header" class="clearfix">
@@ -250,21 +250,14 @@ export default {
   margin-bottom: 18px;
 }
 .box-card1 {
-  width: 420px;
+  width: 350px;
   border-color: #99a9bf;
   margin-bottom: 20px;
 }
 
-/*.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both
-}*/
 .el-col {
   margin-top: 20px;
+  margin-right: 20px;
 }
 .changeDiv{
   alignment: center;
@@ -281,6 +274,8 @@ export default {
 }
 
 .conScroll{
+  margin-left: 200px;
+  width: 87%;
   height: 100vh;
   overflow-y: scroll;
 }

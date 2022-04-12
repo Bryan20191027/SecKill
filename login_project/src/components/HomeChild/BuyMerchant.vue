@@ -173,6 +173,7 @@ name: "buyMerchant",
 }
 
 .conScroll{
+  width: 87%;
   height: 100vh;
   overflow-y: scroll;
   margin-bottom: 30px;

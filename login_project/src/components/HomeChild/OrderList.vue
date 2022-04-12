@@ -97,6 +97,7 @@ export default {
 
 <style scoped>
 .conScroll{
+  width: 87%;
   height: 100vh;
   overflow-y: scroll;
 }

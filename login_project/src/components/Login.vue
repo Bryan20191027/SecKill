@@ -5,7 +5,6 @@
     </video>
     <el-row :gutter="20">
       <el-col :span="8" :offset="16">
-        <transition name
         <div  class="loginDiv" v-if="!isReg">
           <h2>登录</h2>
           <h3> </h3>
@@ -231,7 +230,7 @@ export default {
     border-radius: 20px;
     padding:20px;
     position: absolute;
-    background:rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.7);
     margin-top:60px;
  }
 
@@ -242,7 +241,7 @@ export default {
     border-radius: 20px;
     padding:20px;
     position: absolute;
-    background:rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.7);
     margin-top:60px;
   }
   .regDIV{
@@ -252,12 +251,8 @@ export default {
   .collDiv{
     background:rgba(255,255,255,0.3);
   }
-
 </style>
 
 <style>
-  .el-form-item__label{
-    color: black;
-    font-size: 15px;
-  }
+
 </style>

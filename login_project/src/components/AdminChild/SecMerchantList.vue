@@ -191,7 +191,7 @@ export default {
   margin-bottom: 18px;
 }
 .box-card1 {
-  width: 400px;
+  width: 350px;
   border-color: #99a9bf;
   margin-bottom: 30px;
 }
@@ -207,6 +207,7 @@ export default {
 }
 .el-col {
   margin-top: 20px;
+  margin-right: 20px;
 }
 .changeDiv{
   alignment: center;
@@ -223,6 +224,7 @@ export default {
 }
 
 .conScroll{
+  width: 87%;
   height: 100vh;
   overflow-y: scroll;
 }

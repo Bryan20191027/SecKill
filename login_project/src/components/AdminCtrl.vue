@@ -30,12 +30,12 @@
             <el-menu-item index="/Admin/SecMerchantList" style="font-size: 17px">秒杀商品列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="3">
+        <el-menu-item index="/Admin/UserCtrl">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span style="font-size: 20px">用户设置</span>
           </template>
-        </el-submenu>
+        </el-menu-item>
       </el-menu>
     </el-col>
     <div class="navContent">

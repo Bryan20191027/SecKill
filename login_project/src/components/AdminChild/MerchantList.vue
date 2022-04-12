@@ -1,8 +1,9 @@
 <template>
   <div>
+    <topDiv></topDiv>
     <el-container class="conScroll">
   <el-row :gutter="20" v-if="(!ifChange)&&(!ifSet)" style="display: flex;flex-wrap: wrap">
-    <el-col v-for="(merchant,index) in Merchants" :key="reFresh" :span="5" :offset="1" class="el-col" >
+    <el-col v-for="(merchant,index) in Merchants" :key="reFresh" :span="6" :offset="1" class="el-col" >
       <el-card class="box-card1" shadow="hover">
         <div slot="header" class="clearfix">
           <span>{{merchant.name}}</span>
@@ -60,6 +61,7 @@
           <el-button type="primary" icon="el-icon-edit" @click="SetMerchantSet">设置秒杀商品</el-button>
         </el-form>
       </div>
+      <div style="margin-top: 30px;"></div>
     </el-container>
   </div>
 </template>
@@ -249,6 +251,7 @@ export default {
 .box-card1 {
   width: 420px;
   border-color: #99a9bf;
+  margin-bottom: 20px;
 }
 
 /*.clearfix:before,
@@ -260,7 +263,6 @@ export default {
   clear: both
 }*/
 .el-col {
-  margin-bottom: 20px;
   margin-top: 20px;
 }
 .changeDiv{

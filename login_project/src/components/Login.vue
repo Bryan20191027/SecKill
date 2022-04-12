@@ -5,8 +5,9 @@
     </video>
     <el-row :gutter="20">
       <el-col :span="8" :offset="16">
+        <transition name
         <div  class="loginDiv" v-if="!isReg">
-          <h2>登录页面</h2>
+          <h2>登录</h2>
           <h3> </h3>
           <el-form ref="form" label-width="80px">
             <el-form-item label="用户名">
@@ -34,7 +35,8 @@
           </el-form>
         </div>
         <div class="regDiv" v-if="isReg">
-          <h2>注册页面</h2>
+          <el-button type="primary" icon="el-icon-arrow-left" style="float: left" @click="clickToReg"></el-button>
+          <h2 style="float: top">注册</h2>
           <h3> </h3>
           <el-form :model="regForm" label-width="80px">
             <el-form-item label="用户名">
@@ -71,9 +73,9 @@
                   <el-input v-model="regForm.email" class="input"></el-input>
                 </el-form-item>
             <el-row :gutter="20" style="margin-top: 10px">
-              <el-col :span="6" :offset="3">
+              <el-col :span="7" :offset="5">
                 <el-form-item>
-                  <el-button type="primary" @click="userRegister">注册</el-button>
+                  <el-button type="primary" @click="userRegister" style="float: left">注册</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -134,10 +136,9 @@ export default {
               message: '登录成功',
               type: 'success'
             });
-            const accessToken = result.data.token;
             sessionStorage.clear()
-            sessionStorage['uid']=result.data.id
-            sessionStorage['token']=result.data.token
+            sessionStorage['uid']=window.btoa(window.encodeURIComponent(JSON.stringify(result.data.id)))
+            sessionStorage['token']=window.btoa(window.encodeURIComponent(JSON.stringify(result.data.token)))
             if(result.data.legal ===1)
               vm.$router.push('/Home/buyMerchant')
             else
@@ -153,7 +154,7 @@ export default {
       })
     },
     clickToReg(){
-      this.isReg=true
+      this.isReg=!this.isReg
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -233,7 +234,7 @@ export default {
  }
 
   .regDiv{
-    width:300px;
+    width:350px;
     height:680px;
     border: 1px solid #2c3e50;
     border-radius: 20px;

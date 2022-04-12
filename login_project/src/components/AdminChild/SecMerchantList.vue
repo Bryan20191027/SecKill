@@ -1,5 +1,6 @@
 <template>
   <div>
+    <topDiv></topDiv>
     <el-container class="conScroll">
       <el-row :gutter="20" v-if="!ifChange" style="display: flex;flex-wrap: wrap">
         <el-col v-for="(merchant,index) in SecMerchants" :key="reFresh" :span="5" :offset="2" class="el-col">
@@ -46,6 +47,7 @@
           <el-button type="primary" icon="el-icon-edit" @click="changeSecMerchantSet">提交修改</el-button>
         </el-form>
       </div>
+      <div style="margin-top: 30px;"></div>
     </el-container>
   </div>
 </template>
@@ -189,8 +191,9 @@ export default {
   margin-bottom: 18px;
 }
 .box-card1 {
-  width: 350px;
+  width: 400px;
   border-color: #99a9bf;
+  margin-bottom: 30px;
 }
 
 .clearfix:before,
@@ -203,7 +206,6 @@ export default {
   clear: both
 }
 .el-col {
-  margin-bottom: 20px;
   margin-top: 20px;
 }
 .changeDiv{

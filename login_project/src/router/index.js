@@ -9,6 +9,7 @@ import AddMerchant from "../components/AdminChild/AddMerchant";
 import BuyMerchant from "../components/HomeChild/BuyMerchant";
 import OrderList from "../components/HomeChild/OrderList";
 import UserSetting from "../components/HomeChild/UserSetting";
+import UserCtrl from "../components/AdminChild/UserCtrl";
 
 Vue.use(Router)
 
@@ -29,21 +30,33 @@ const router = new Router({
       path: '/Home',
       name: 'Home',
       component: Home,
+      meta:{
+        requireAuth:true
+      },
       children:[
         {
           path: '/Home/BuyMerchant',
           name: 'MerchantList',
-          component: BuyMerchant
+          component: BuyMerchant,
+          meta:{
+            requireAuth:true
+          },
         },
         {
           path: '/Home/OrderList',
           name: 'SecMerchantList',
-          component: OrderList
+          component: OrderList,
+          meta:{
+            requireAuth:true
+          },
         },
         {
           path: '/Home/UserSetting',
           name: 'AddMerchant',
-          component: UserSetting
+          component: UserSetting,
+          meta:{
+            requireAuth:true
+          },
         }
       ]
     },
@@ -51,21 +64,41 @@ const router = new Router({
       path: '/Admin',
       name: 'Admin',
       component: AdminCtrl,
+      meta:{
+        requireAuth:true
+      },
       children:[
         {
           path: '/Admin/MerchantList',
           name: 'MerchantList',
-          component: MerchantList
+          component: MerchantList,
+          meta:{
+            requireAuth:true
+          },
         },
         {
           path: '/Admin/SecMerchantList',
           name: 'SecMerchantList',
-          component: SecMerchantList
+          component: SecMerchantList,
+          meta:{
+            requireAuth:true
+          },
         },
         {
           path: '/Admin/AddMerchant',
           name: 'AddMerchant',
-          component: AddMerchant
+          component: AddMerchant,
+          meta:{
+            requireAuth:true
+          },
+        },
+        {
+          path: '/Admin/UserCtrl',
+          name: 'UserCtrl',
+          component: UserCtrl,
+          meta:{
+            requireAuth:true
+          },
         }
       ]
     }

@@ -14,7 +14,9 @@ import './assets/css/global.css'
 import Moment from 'moment'
 
 import SecKillTimes from "./components/HomeChild/SecKillTimes"
+import topDIV from "./components/topDIV";
 Vue.component('timeCD',SecKillTimes)
+Vue.component('topDiv',topDIV)
 
 Vue.use(ElementUi)
 Vue.use(VueAxios,axios)
@@ -30,3 +32,14 @@ new Vue({
   template: '<App/>'
 })
 
+let whitelist = ['http://47.99.149.141:8000/login/dologin']
+axios.interceptors.request.use(config=>{
+  console.log(config)
+  if (whitelist.includes(config.url)) {
+    return config
+  }
+  else {
+    config.headers.Authorization = "Bearer " + JSON.parse(decodeURIComponent(window.atob(window.sessionStorage.getItem('token'))))
+    return config
+  }
+})

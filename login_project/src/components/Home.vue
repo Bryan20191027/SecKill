@@ -23,7 +23,7 @@
             <span style="font-size: 20px">查看订单</span>
           </template>
         </el-menu-item>
-        <<el-menu-item index="/Home/UserSetting">
+        <el-menu-item index="/Home/UserSetting">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span style="font-size: 20px">用户设置</span>

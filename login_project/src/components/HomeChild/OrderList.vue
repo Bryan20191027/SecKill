@@ -1,5 +1,7 @@
 <template>
-  <div class="conScroll">
+  <div>
+    <topDiv></topDiv>
+    <div class="conScroll">
     <el-container>
       <el-row :gutter="20">
         <el-col v-for="(merchant) in userOrderList" :key="reFreshKey" :span="18" :offset="1" class="el-col">
@@ -29,6 +31,9 @@
         </el-col>
       </el-row>
     </el-container>
+      <div style="margin-top: 30px;height: 50px"></div>
+  </div>
+
   </div>
 </template>
 
@@ -61,7 +66,7 @@ export default {
         method: "GET",
         url: "http://47.99.149.141:8000/order/user",
         params:{
-          "uid":sessionStorage.getItem('uid')
+          "uid":JSON.parse(decodeURIComponent(window.atob(sessionStorage.getItem('uid'))))
         }
       }).then(function (resp) {
         var result = resp.data;

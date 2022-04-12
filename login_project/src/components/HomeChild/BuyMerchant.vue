@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <topDiv></topDiv>
   <div class="conScroll">
     <el-container>
       <el-row :gutter="20">
@@ -34,6 +36,8 @@
         </el-col>
       </el-row>
     </el-container>
+    <div style="margin-top: 30px;height: 50px"></div>
+  </div>
   </div>
 </template>
 
@@ -71,6 +75,7 @@ name: "buyMerchant",
             vm.userMerchants.push(result.data[i])
           }
         } else {
+          alert(resp.data.errorCode)
           alert("Fail")
         }
       })
@@ -87,7 +92,7 @@ name: "buyMerchant",
           method: "GET",
           url: "http://47.99.149.141:8000/service/path/",
           params: {
-            "uid": sessionStorage.getItem('uid')
+            "uid": JSON.parse(decodeURIComponent(window.atob(sessionStorage.getItem('uid'))))
           }
         }).then(function (resp) {
           var result = resp.data;
@@ -109,7 +114,7 @@ name: "buyMerchant",
         method: "POST",
         url: "http://47.99.149.141:8000/service/doseckill/"+path,
         params:{
-          "uid":sessionStorage.getItem('uid'),
+          "uid":JSON.parse(decodeURIComponent(window.atob(sessionStorage.getItem('uid')))),
           "sid":sid
         }
       }).then(function (resp) {
@@ -150,7 +155,6 @@ name: "buyMerchant",
   border-color: #99a9bf;
   border-width: 3px;
 }
-
 .el-col {
   margin-bottom: 5px;
   margin-top: 5px;
@@ -171,5 +175,6 @@ name: "buyMerchant",
 .conScroll{
   height: 100vh;
   overflow-y: scroll;
+  margin-bottom: 30px;
 }
 </style>

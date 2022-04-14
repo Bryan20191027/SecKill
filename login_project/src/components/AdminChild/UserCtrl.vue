@@ -6,16 +6,9 @@
         <el-row :gutter="20">
           <el-col v-for="(user) in userList" :key="reFreshKey" :span="18" :offset="1" class="el-col">
             <el-card class="box-card1" shadow="hover">
-              <div slot="header" class="clearfix">
-                <div>用户id:{{user.userId}}</div>
-                <div>用户名:{{user.username}}</div>
-              </div>
+              <div style="font-size: 20px;margin-bottom: 5px">用户id:{{user.userId}}</div>
+              <div style="font-size: 20px;margin-bottom: 5px">用户名:{{user.username}}</div>
               <div class="text item">
-                <span style="font-size: 18px;">角色:{{user.role}}</span>
-                <div style="padding: 14px">
-                  <span style="font-size: 20px;">{{"&#12288&#12288&#12288真实姓名："+user.name}}</span>
-                  <span style="font-size: 20px;color: crimson;">{{"&#12288&#12288&#12288身份证证号:"+user.idcard}}</span>
-                </div>
                 <div class="rightDIV">
                   <el-button type="danger" round @click="deleteUser(user.userId)">删除用户</el-button>
                 </div>
@@ -26,10 +19,9 @@
                     用户详细信息<i class="header-icon el-icon-info"></i>
                   </template>
                   <div style="font-size: 15px">
-                    <div>电子邮箱地址：{{user.email}}</div>
-                    <div>电话号码：{{user.mobile}}</div>
-                    <div>性别：{{user.sexual}}</div>
+                    <div style="font-size: 18px;">角色:{{user.role}}</div>
                     <div>年龄：{{user.age}}</div>
+                    <div>身份证号码：{{user.idcard}}</div>
                     <div>余额：{{user.count}}</div>
                   </div>
                 </el-collapse-item>
@@ -54,10 +46,6 @@ export default {
         userId:"",
         role:"",
         username:"",
-        email:"",
-        mobile:"",
-        name:"",
-        sexual:"",
         idcard:"",
         age:0,
         count:0,
@@ -86,10 +74,6 @@ export default {
             userOne.userId=result.data[i].userId
             userOne.role=(result.data[i].roleId===102?"用户":(result.data[i].roleId===103?"禁止用户":"管理员"))
             userOne.username=result.data[i].username
-            userOne.email=result.data[i].email
-            userOne.mobile=result.data[i].mobile
-            userOne.name=result.data[i].name
-            userOne.sexual=(result.data[i].sexual===true?"男":"女")
             userOne.idcard=result.data[i].idcard
             userOne.age=result.data[i].age
             userOne.count=result.data[i].count
@@ -143,7 +127,6 @@ export default {
   width: 150%;
   height: auto;
   max-width: 1200px;
-  /*max-height: 200px;*/
   border-color: #99a9bf;
   border-width: 3px;
 }

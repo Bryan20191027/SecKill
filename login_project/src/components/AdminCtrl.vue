@@ -14,26 +14,26 @@
         <el-submenu index="/Admin/MerchantList">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span style="font-size: 20px">商品设置</span>
+            <span style="font-size: 18px">商品设置</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/Admin/MerchantList" style="font-size: 17px">商品列表</el-menu-item>
-            <el-menu-item index="/Admin/AddMerchant" style="font-size: 17px">增加商品</el-menu-item>
+            <el-menu-item index="/Admin/MerchantList" style="font-size: 15px">商品列表</el-menu-item>
+            <el-menu-item index="/Admin/AddMerchant" style="font-size: 15px">增加商品</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span style="font-size: 20px">秒杀商品设置</span>
+            <span style="font-size: 18px">秒杀设置</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/Admin/SecMerchantList" style="font-size: 17px">秒杀商品列表</el-menu-item>
+            <el-menu-item index="/Admin/SecMerchantList" style="font-size: 15px">秒杀列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/Admin/UserCtrl">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span style="font-size: 20px">用户设置</span>
+            <span style="font-size: 18px">用户设置</span>
           </template>
         </el-menu-item>
       </el-menu>

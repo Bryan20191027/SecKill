@@ -1,6 +1,6 @@
 <template>
   <div class="topDIV">
-    <el-button type="primary" icon="el-icon-arrow-left" style="float:right;margin:10px" @click="exit">退出登录</el-button>
+    <el-button type="primary" icon="el-icon-arrow-left" style="float:left;margin:10px;" @click="exit">退出登录</el-button>
   </div>
 </template>
 

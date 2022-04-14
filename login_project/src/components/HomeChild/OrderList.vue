@@ -105,6 +105,7 @@ export default {
   width: 150%;
   height: auto;
   max-width: 1200px;
+  min-width: 1000px;
   /*max-height: 200px;*/
   border-color: #99a9bf;
   border-width: 3px;

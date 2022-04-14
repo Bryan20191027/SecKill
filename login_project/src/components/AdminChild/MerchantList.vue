@@ -50,11 +50,11 @@
           </el-form-item>
           <el-form-item>
             <el-col class="line" :span="3">秒杀时间</el-col>
-            <el-col :span="9">
+            <el-col :span="8">
               <el-date-picker type="datetime" placeholder="选择开始时间" v-model="MerchantsSet.start_time" style="width: 100%;"></el-date-picker>
             </el-col>
-            <el-col class="line" :span="2">-</el-col>
-            <el-col :span="9">
+            <el-col class="line" :span="1">-</el-col>
+            <el-col :span="8">
               <el-date-picker type="datetime" placeholder="选择结束时间" v-model="MerchantsSet.end_time" style="width: 100%;"></el-date-picker>
             </el-col>
           </el-form-item>
@@ -122,7 +122,6 @@ export default {
     },
     deleteMerchant(merchantID) {
       handleConfirm('是否确定删除该商品').then(res=>{
-        alert(merchantID)
         var vm = this;
         this.axios({
           headers: {
@@ -235,7 +234,6 @@ export default {
         })
         this.MerchantsSet={}
         this.settingIndex = null
-        //this.$forceUpdate()
       }
     }
   }

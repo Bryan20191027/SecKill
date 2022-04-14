@@ -14,19 +14,19 @@
         <el-menu-item index="/Home/buyMerchant" :disabled="!this.ableToBuy">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span style="font-size: 20px">购买商品</span>
+            <span style="font-size: 18px">购买商品</span>
           </template>
         </el-menu-item>
         <el-menu-item index="/Home/OrderList">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span style="font-size: 20px">查看订单</span>
+            <span style="font-size: 18px">查看订单</span>
           </template>
         </el-menu-item>
         <el-menu-item index="/Home/UserSetting">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span style="font-size: 20px">用户设置</span>
+            <span style="font-size: 18px">用户设置</span>
           </template>
         </el-menu-item>
       </el-menu>
